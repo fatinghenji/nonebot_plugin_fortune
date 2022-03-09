@@ -1,4 +1,4 @@
-from nonebot.adapters.onebot.v11 import GroupMessageEvent
+from nonebot.adapters.mirai2 import GroupMessageEvent
 from typing import Optional, Union, Dict, Tuple
 from pathlib import Path
 import random
