@@ -2,7 +2,7 @@ from nonebot import require
 from nonebot import logger
 from nonebot import on_command, on_regex
 from nonebot.permission import SUPERUSER
-from nonebot.adapters.onebot.v11 import Bot, GROUP, GROUP_ADMIN, GROUP_OWNER, GroupMessageEvent, MessageSegment
+from nonebot.adapters.mirai2 import Bot, GROUP_MEMBER, GROUP_ADMIN, GROUP_OWNER, GroupMessage, MessageSegment
 from .data_source import fortune_manager
 from .utils import MainThemeList
 import re
