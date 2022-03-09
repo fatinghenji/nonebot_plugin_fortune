@@ -45,7 +45,7 @@ class FortuneManager:
             with open(setting_file, "r", encoding="utf-8") as f:
                 self.setting = json.load(f)
     
-    def check(self, event: GroupMessageEvent) -> bool:
+    def check(self, event: GroupMessage) -> bool:
         '''
             检测是否重复抽签
         '''
@@ -67,7 +67,7 @@ class FortuneManager:
         
         return False
 
-    def divine(self, spec_path: Optional[str], event: GroupMessageEvent) -> Tuple[str, bool]:
+    def divine(self, spec_path: Optional[str], event: GroupMessage) -> Tuple[str, bool]:
         '''
             今日运势抽签
             主题在群设置主题divination_setting()已确认合法
@@ -110,7 +110,7 @@ class FortuneManager:
         with open(self.data_file, 'w', encoding='utf-8') as f:
             json.dump(self.user_data, f, ensure_ascii=False, indent=4)
 
-    def _init_user_data(self, event: GroupMessageEvent) -> None:
+    def _init_user_data(self, event: GroupMessage) -> None:
         '''
             初始化用户信息
         '''
@@ -145,14 +145,14 @@ class FortuneManager:
         
         return msg
     
-    def get_user_data(self, event: GroupMessageEvent) -> Dict[str, Union[str, bool]]:
+    def get_user_data(self, event: GroupMessage) -> Dict[str, Union[str, bool]]:
         '''
             获取用户数据
         '''
         self._init_user_data(event)
         return self.user_data[str(event.group_id)][str(event.user_id)]
 
-    def _end_data_handle(self, event: GroupMessageEvent) -> None:
+    def _end_data_handle(self, event: GroupMessage) -> None:
         '''
             占卜结束数据保存
         '''
@@ -161,7 +161,7 @@ class FortuneManager:
         self.user_data[group_id][user_id]["is_divined"] = True
         self.save_data()
 
-    def divination_setting(self, theme: str, event: GroupMessageEvent) -> bool:
+    def divination_setting(self, theme: str, event: GroupMessage) -> bool:
         '''
             分群管理抽签设置
         '''
@@ -174,7 +174,7 @@ class FortuneManager:
         else:
             return False
 
-    def get_setting(self, event: GroupMessageEvent) -> str:
+    def get_setting(self, event: GroupMessage) -> str:
         '''
             获取当前群抽签主题，若没有数据则置随机
         '''
